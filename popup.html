@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Writer Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    textarea, select, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    output {
+      display: block;
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+      border-radius: 4px;
+      min-height: 50px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Writer Test</h1>
+    <form class="write-form">
+      <textarea rows="4" placeholder="Enter your prompt here..."></textarea>
+      <select class="tone">
+        <option value="formal">Formal</option>
+        <option value="informal">Informal</option>
+      </select>
+      <select class="length">
+        <option value="short">Short</option>
+        <option value="medium">Medium</option>
+        <option value="long">Long</option>
+      </select>
+      <button type="submit">Generate</button>
+    </form>
+    <output></output>
+    <button class="copy-button hidden">Copy to Clipboard</button>
+    <p class="not-supported-message hidden" style="color: red;">AI functionality is not supported in this environment.</p>
+  </div>
+  <script>
+    // Mock self.ai object for testing (if AI is not available)
+    if (!self.ai) {
+      self.ai = {
+        writer: {
+          create: async () => ({
+            writeStreaming: async function* (prompt) {
+              for (const word of ["This", "is", "a", "mocked", "response."]) {
+                yield `${prompt} ${word}`;
+                await new Promise((r) => setTimeout(r, 500));
+              }
+            },
+          }),
+        },
+      };
+    }
+
+    (async () => {
+      const writeForm = document.querySelector('.write-form');
+      const output = document.querySelector('output');
+      const copyButton = document.querySelector('.copy-button');
+
+      const write = async () => {
+        const prompt = document.querySelector('textarea').value.trim();
+        if (!prompt) return;
+        output.textContent = 'Generating...';
+        try {
+          const writer = await self.ai.writer.create({
+            tone: document.querySelector('.tone').value,
+            length: document.querySelector('.length').value,
+          });
+          const stream = await writer.writeStreaming(prompt);
+          let response = '';
+          for await (const chunk of stream) {
+            response += chunk;
+            output.textContent = response;
+          }
+          copyButton.classList.remove('hidden');
+        } catch (error) {
+          console.error(error);
+          output.textContent = 'Error generating response.';
+        }
+      };
+
+      writeForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await write();
+      });
+
+      copyButton.addEventListener('click', async () => {
+        const text = output.textContent;
+        await navigator.clipboard.writeText(text);
+        alert('Copied to clipboard!');
+      });
+    })();
+  </script>
+</body>
+</html>

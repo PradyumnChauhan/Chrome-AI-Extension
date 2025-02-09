@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./style.css">
+		<title>AI Text Tools</title>
+	</head>
+	<body>
+		<div class="main-wrapper">
+			<div class="app">
+				<div class="main-view">
+					<div class="result-view view" id="promptai" isactive="true">
+						<div class="splinelm">
+							<iframe src="https://my.spline.design/siri-1476a3634f2325d724489edb268c3613/" style="width:100%; height: 135%; border: none; "></iframe>
+							<div class="spline-hide"></div>
+						</div>
+						<div class="pre-prompt">
+							<h1 class="hi">Hi, </h1>
+							<h1 class="assist">How can i assist you today?</h1>
+							<div class="pre-prompt-div">
+								<h1>Write a Shakespearean-style sonnet about smartphones </h1>
+							</div>
+							<div class="pre-prompt-div">
+								<h1>Suggest 10 creative Halloween costumes for kids </h1>
+							</div>
+							<div class="pre-prompt-div">
+								<h1>Outline a beginner's roadmap for learning personal finance </h1>
+							</div>
+						</div>
+						<div class="chat-answer">
+							<div class="message">
+								<div class="question-wrapper">
+									<div class="question"></div>
+								</div>
+								<div class="answer">
+									<div class="upper-header">
+										<img src="./images/chrome.png" style="width: 20px; height: 20px;">
+										<h1>Chrome AI</h1>
+									</div>
+									<div class="main-answer"></div>
+									<div class="options">
+										<img class="promptai-copy" style="width: 15px;" src="./images/copy.png" alt="">
+										<img class="promptai-redo" style="width: 15px;" src="./images/redo.png" alt="">
+										<img class="promptai-quote" style="width: 15px;" src="./images/quote-left.png" alt="">
+										<img class="promptai-share" style="width: 15px;" src="./images/share.png" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="chat-view">
+							<div class="chat-wrapper">
+								<textarea name="promptai" placeholder="write a message..." id="promptaitxt" class="promptai-textarea"></textarea>
+								<div class="promptai-button" id="promptaiButton">
+									<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
+										<path d="M3.241 14.528c.636.157 1.773-.328 4.046-1.3l2.081-.89c3.181-1.359 4.772-2.038 5.254-2.995.418-.83.418-1.81 0-2.64-.482-.956-2.073-1.636-5.254-2.996l-2.13-.91c-2.247-.96-3.37-1.44-3.994-1.295A1.96 1.96 0 0 0 1.74 3.22c-.061.637.564 1.687 1.815 3.787.1.166.173.29.227.393H8a.6.6 0 0 1 0 1.2H3.79c-.053.105-.126.23-.225.4-1.249 2.14-1.873 3.21-1.796 3.86a1.955 1.955 0 0 0 1.472 1.668" fill="#6128FF"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="write view" id="write" isactive="false">
+						<div class="write-header">
+							<h1 class='writeh1 active'>Write</h1>
+							<h1 class="rewriteh1 inactive">Rewrite</h1>
+						</div>
+						<div class="write-options-wrapper">
+							<div class="write-options">
+								<div class="write-item tone" id="selected-style">As-is</div>
+								<div class="write-item format" id="selected-format">Plaintext</div>
+								<div class="write-item length" id="selected-length">Short</div>
+							</div>
+							<div id="popupSelector" class="popup-container" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out;">
+								<div class="option-section">
+									<h4>Style</h4>
+									<div class="option-buttons">
+										<button class="option" data-type="style" data-value="As-is">As-is</button>
+										<button class="option" data-type="style" data-value="Formal">Formal</button>
+										<button class="option" data-type="style" data-value="Casual">Casual</button>
+									</div>
+								</div>
+								<div class="option-section">
+									<h4>Length</h4>
+									<div class="option-buttons">
+										<button class="option" data-type="length" data-value="Short">Short</button>
+										<button class="option" data-type="length" data-value="Medium">Medium</button>
+										<button class="option" data-type="length" data-value="Long">Long</button>
+									</div>
+								</div>
+								<div class="option-section">
+									<h4>Format</h4>
+									<div class="option-buttons">
+										<button class="option" data-type="format" data-value="Markdown">Markdown</button>
+										<button class="option" data-type="format" data-value="Plaintext">Plaintext</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="write-text">
+							<div class="write-question-wrapper">
+								<textarea name="write" placeholder="Enter the topic you want to write about" id="writetextarea"></textarea>
+								<div class="write-submit">
+									<img class="dustbin" src="./dustbin.png" style="width: 15px;" alt="">
+									<div class="submit" id="writeSubmit">Submit</div>
+								</div>
+							</div>
+						</div>
+						<div class="write-answer">
+							<div class="write-answer-wrapper">
+								<div class="message">
+									<div class="answer">
+										<div class="upper-header">
+											<img src="./images/chrome.png" style="width: 20px; height: 20px;">
+											<h1>Chrome AI</h1>
+										</div>
+										<div class="main-answer write-ans"></div>
+										<div class="options">
+											<img src="./copy.png" alt="">
+											<img src="./redo.png" alt="">
+											<img src="./quote-left.png" alt="">
+											<img src="./share.png" alt="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="translate-wrapper view" id="translate" isactive="false">
+						<div class="translate-header">
+							<h1>Translate</h1>
+						</div>
+						<div class="translate-view">
+							<div class="translate-main">
+								<div class="translate-options">
+									<div class="detect-language">
+										<h1 style="font-weight: 400; font-size: 14px;">Auto detect</h1>
+									</div>
+									<div class="translate-image">
+										<img src="./images/right-arrow.png" style="width: 14px; margin-left: 15px;" alt="">
+									</div>
+									<div class="translate-lang">
+										<select class="final-language-dropdown" id="languageSelect">
+											<option value="ar">Arabic (ar)</option>
+											<option value="bn">Bengali (bn)</option>
+											<option value="de">German (de)</option>
+											<option value="es">Spanish (es)</option>
+											<option value="fr">French (fr)</option>
+											<option value="hi">Hindi (hi)</option>
+											<option value="it">Italian (it)</option>
+											<option value="ja">Japanese (ja)</option>
+											<option value="ko">Korean (ko)</option>
+											<option value="nl">Dutch (nl)</option>
+											<option value="pl">Polish (pl)</option>
+											<option value="pt">Portuguese (pt)</option>
+											<option value="ru">Russian (ru)</option>
+											<option value="th">Thai (th)</option>
+											<option value="tr">Turkish (tr)</option>
+											<option value="vi">Vietnamese (vi)</option>
+											<option value="zh">Chinese Simplified (zh)</option>
+											<option value="zh-Hant">Chinese Traditional (zh-Hant)</option>
+										</select>
+									</div>
+								</div>
+								<textarea class="textarea-translate" name="translate" placeholder="Type or paste text here" id=""></textarea>
+								<div class="translate-button" id="translateButton">Translate</div>
+							</div>
+							<div class="translate-answer">
+								<div class="answer">
+									<div class="translate-answrap">
+										<div class="upper-header">
+											<img src="./images/chrome.png" style="width: 20px; height: 20px;">
+											<h1>Chrome AI</h1>
+										</div>
+										<div class="main-answer" id="translate-anss"></div>
+										<div class="options">
+											<img src="./copy.png" alt="">
+											<img src="./redo.png" alt="">
+											<img src="./quote-left.png" alt="">
+											<img src="./share.png" alt="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="summary-view view" id="summarize" isactive="false">
+						<div class="summary-header">
+							<h1>Summary</h1>
+							<div class="options-dropdown" id="toggleSummaryPopup">
+								<div class="selected-options">
+									<span id="selected-style">Key Points</span>
+									<span id="selected-length">Short</span>
+									<span id="selected-format">Markdown</span>
+								</div>
+							</div>
+							<div id="popupSelectorsummary" class="popup-container" style="display: none; opacity: 0; transition: opacity 0.3s ease-in-out;">
+								<div class="option-section">
+									<h4>Style</h4>
+									<div class="option-buttons">
+										<button class="option selected" data-type="style" data-value="keyPoints">Key Points</button>
+										<button class="option" data-type="style" data-value="tldr">TL;DR</button>
+										<button class="option" data-type="style" data-value="teaser">Teaser</button>
+										<button class="option" data-type="style" data-value="headline">Headline</button>
+									</div>
+								</div>
+								<div class="option-section">
+									<h4>Length</h4>
+									<div class="option-buttons">
+										<button class="option selected" data-type="length" data-value="short">Short</button>
+										<button class="option" data-type="length" data-value="medium">Medium</button>
+										<button class="option" data-type="length" data-value="long">Long</button>
+									</div>
+								</div>
+								<div class="option-section">
+									<h4>Format</h4>
+									<div class="option-buttons">
+										<button class="option selected" data-type="format" data-value="markdown">Markdown</button>
+										<button class="option" data-type="format" data-value="plaintext">Plaintext</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="summary-wrapper">
+							<div class="summary-main">
+								<textarea name="summary" placeholder="Write text" class="summary-textarea" id=""></textarea>
+								<div class="summary-button" id="summaryButton"> Summarize </div>
+							</div>
+						</div>
+						<div class="summary-answer">
+							<div class="message">
+								<div class="answer">
+									<div class="upper-header">
+										<img src="./images/chrome.png" style="width: 20px; height: 20px;">
+										<h1>Chrome AI</h1>
+									</div>
+									<div class="main-answer"></div>
+									<div class="options">
+										<img src="./images/copy.png" alt="">
+										<img src="./images/redo.png" alt="">
+										<img src="./images/quote-left.png" alt="">
+										<img src="./images/share.png" alt="">
+									</div>
+								</div>
+								<div class="summary-answer-wrapper"></div>
+							</div>
+						</div>
+					</div>
+					<div class="history-view view" id="history" isactive="false" style="display: none; overflow-y: auto;">
+						<div class="history-list" style="padding: 10px; background-color: #F6F6F8; border-radius: 10px;  overflow-y: auto;">
+							<!-- History items will be dynamically added here -->
+						</div>
+					</div>
+				</div>
+				<div class="sidebar">
+					<div class="chat-icon icons promptai" id="togglePromptai">
+						<div class="icon-img-wrapper" style="background-color: #F7F7F8;">
+							<img src="./images/chat-blue.png" class="nav-icon" data-grey="./images/chat-grey.png" data-black="./images/chat-black.png" data-blue="./images/chat-blue.png" style="width: 22px;" alt="">
+						</div>
+						<h1 class="hhh">Chat</h1>
+					</div>
+					<div class="translate-icon icons translate" id="toggleTranslate">
+						<div class="icon-img-wrapper">
+							<img src="./images/translate-grey.png" class="nav-icon" data-grey="./images/translate-grey.png" data-black="./images/translate-black.png" data-blue="./images/translate-blue.png" style="width: 22px;" alt="">
+						</div>
+						<h1> Translate </h1>
+					</div>
+					<div class="summary-icon icons summarize" id="toggleSummarize">
+						<div class="icon-img-wrapper">
+							<img src="./images/summary-grey.png" class="nav-icon" data-grey="./images/summary-grey.png" data-black="./images/summary-black.png" data-blue="./images/summary-blue.png" style="width: 26px;" alt="">
+						</div>
+						<h1>Summarize</h1>
+					</div>
+					<div class="write-icon icons " id="toggleWrite">
+						<div class="icon-img-wrapper">
+							<img src="./images/write-grey.png" class="nav-icon" data-grey="./images/write-grey.png" data-black="./images/write-black.png" data-blue="./images/write-blue.png" style="width: 22px;" alt="">
+						</div>
+						<h1>Write</h1>
+					</div>
+					<div class="history-icon icons history" id="toggleHistory">
+						<div class="icon-img-wrapper">
+							<img src="./images/history-grey.png" class="nav-icon" data-grey="./images/history-grey.png" data-black="./images/history-black.png" data-blue="./images/history-blue.png" style="width: 25px; height: 25px;" alt="">
+						</div>
+						<h1>History</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of app div -->
+		<script type="module" src="./popup.js"></script>
+</html>
